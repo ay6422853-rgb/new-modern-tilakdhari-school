@@ -1,0 +1,202 @@
+.principal-marks-page {
+  padding: 24px;
+  max-width: 1500px;
+  margin: auto;
+}
+
+.principal-marks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.principal-marks-header h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.principal-marks-header p {
+  margin: 5px 0;
+  color: #64748b;
+}
+
+.principal-marks-header button {
+  border: 0;
+  padding: 11px 17px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.principal-marks-success,
+.principal-marks-error {
+  padding: 13px 16px;
+  border-radius: 9px;
+  margin-bottom: 18px;
+}
+
+.principal-marks-success {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.principal-marks-error {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.principal-marks-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 22px;
+}
+
+.principal-marks-card {
+  background: white;
+  border: 1px solid #e5eaf0;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+  min-width: 0;
+}
+
+.principal-marks-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.principal-marks-title h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.principal-marks-title span {
+  font-size: 12px;
+  background: #f1f5f9;
+  padding: 6px 10px;
+  border-radius: 20px;
+}
+
+.principal-marks-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.principal-marks-fields > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.principal-marks-fields label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.principal-marks-fields input,
+.principal-marks-fields select,
+.principal-marks-fields textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d8dee8;
+  border-radius: 9px;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.principal-marks-fields input:focus,
+.principal-marks-fields select:focus,
+.principal-marks-fields textarea:focus {
+  border-color: #6366f1;
+}
+
+.principal-marks-two {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.principal-marks-submit {
+  width: 100%;
+  border: 0;
+  border-radius: 9px;
+  padding: 13px;
+  margin-top: 20px;
+  background: #4f46e5;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.principal-marks-table-wrap {
+  overflow-x: auto;
+}
+
+.principal-marks-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+.principal-marks-table-wrap th {
+  text-align: left;
+  background: #f8fafc;
+  padding: 12px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.principal-marks-table-wrap td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #edf0f4;
+  font-size: 13px;
+}
+
+.principal-mark-grade {
+  display: inline-block;
+  min-width: 28px;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-weight: 800;
+}
+
+.principal-marks-table-wrap .empty {
+  text-align: center;
+  padding: 50px;
+  color: #94a3b8;
+}
+
+@media (max-width: 1050px) {
+  .principal-marks-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .principal-marks-page {
+    padding: 15px;
+  }
+
+  .principal-marks-header {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .principal-marks-header h1 {
+    font-size: 24px;
+  }
+
+  .principal-marks-two {
+    grid-template-columns: 1fr !important;
+  }
+}

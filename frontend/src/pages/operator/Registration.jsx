@@ -1,0 +1,2 @@
+import AppLayout from '../../layouts/AppLayout';import CrudPage from '../../components/CrudPage';
+export default function Page(){return <AppLayout role="operator"><CrudPage title="Student Registration" resource="registrations" columns={[{key:'registrationNo',label:'Registration'},{key:'status',label:'Status'}]} fields={[{name:'name',label:'Name',required:true},{name:'fatherName',label:'Father/Guardian'},{name:'phone',label:'Phone'},{name:'registrationFee',label:'Registration Fee',type:'number'}]}/></AppLayout>}

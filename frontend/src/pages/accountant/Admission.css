@@ -1,0 +1,100 @@
+.admission-page {
+  padding: 28px;
+  min-height: 100%;
+  background: #f6f8fc;
+}
+
+.admission-head {
+  margin-bottom: 24px;
+}
+
+.admission-head span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #64748b;
+}
+
+.admission-head h1 {
+  margin: 5px 0;
+  font-size: 29px;
+  color: #172033;
+}
+
+.admission-head p {
+  margin: 0;
+  color: #718096;
+}
+
+.admission-card {
+  background: white;
+  border: 1px solid #e5e9f0;
+  border-radius: 16px;
+  padding: 26px;
+}
+
+.admission-card h2 {
+  margin: 0 0 22px;
+  font-size: 17px;
+  color: #172033;
+}
+
+.admission-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+}
+
+.admission-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.admission-grid input,
+.admission-grid select {
+  padding: 11px 12px;
+  border: 1px solid #dce2ea;
+  border-radius: 9px;
+  outline: none;
+}
+
+.admission-grid input:focus,
+.admission-grid select:focus {
+  border-color: #6366f1;
+}
+
+.admission-btn {
+  margin-top: 25px;
+  padding: 12px 22px;
+  background: #172033;
+  color: white;
+  border: 0;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admission-alert {
+  padding: 14px;
+  border-radius: 9px;
+  margin-bottom: 18px;
+}
+
+.admission-alert.error {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.admission-alert.success {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+@media(max-width:700px) {
+  .admission-page { padding: 18px; }
+  .admission-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,249 @@
+
+.timetable-page {
+  padding: 24px;
+  background: #f6f8fc;
+  min-height: 100%;
+}
+
+.timetable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.timetable-header h1 {
+  margin: 0;
+  color: #172033;
+}
+
+.timetable-header p {
+  margin: 6px 0 0;
+  color: #7b8497;
+}
+
+.timetable-header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.timetable-primary-btn,
+.timetable-print-btn {
+  border: 0;
+  padding: 11px 16px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.timetable-primary-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.timetable-print-btn {
+  background: white;
+  border: 1px solid #dce1e9;
+  color: #344054;
+}
+
+.timetable-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.timetable-filters select {
+  min-width: 180px;
+  padding: 11px;
+  border: 1px solid #dce1e9;
+  border-radius: 9px;
+  background: white;
+}
+
+.timetable-board {
+  background: white;
+  border: 1px solid #e7eaf0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.timetable-scroll {
+  overflow-x: auto;
+}
+
+.timetable-board table {
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: collapse;
+}
+
+.timetable-board th,
+.timetable-board td {
+  border: 1px solid #e5e9f0;
+  padding: 10px;
+  text-align: center;
+}
+
+.timetable-board th {
+  background: #f8fafc;
+  color: #475467;
+  font-size: 12px;
+}
+
+.day-cell {
+  min-width: 100px;
+  font-weight: 700;
+  color: #344054;
+  background: #f8fafc;
+}
+
+.period-cell {
+  height: 95px;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: 0.15s;
+}
+
+.period-cell:hover {
+  background: #f8fbff;
+}
+
+.period-cell strong,
+.period-cell span,
+.period-cell small {
+  display: block;
+}
+
+.period-cell strong {
+  color: #172033;
+  margin-bottom: 5px;
+}
+
+.period-cell span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.period-cell small {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.empty-period-btn {
+  border: 1px dashed #cbd5e1;
+  background: white;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.timetable-empty {
+  padding: 50px;
+  text-align: center;
+  color: #7b8497;
+}
+
+.timetable-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.timetable-modal {
+  width: min(800px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+}
+
+.timetable-modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.timetable-modal-header h2 {
+  margin: 0;
+}
+
+.timetable-modal-header button {
+  border: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.timetable-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.timetable-modal label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.timetable-modal input,
+.timetable-modal select {
+  padding: 11px;
+  border: 1px solid #dce1e9;
+  border-radius: 9px;
+  font: inherit;
+}
+
+.timetable-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.timetable-modal-actions > span {
+  flex: 1;
+}
+
+.timetable-modal-actions > button:not(.timetable-primary-btn):not(.timetable-delete-btn) {
+  border: 1px solid #dce1e9;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.timetable-delete-btn {
+  border: 0;
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+  .timetable-header,
+  .timetable-header-actions,
+  .timetable-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .timetable-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

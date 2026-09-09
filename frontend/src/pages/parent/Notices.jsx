@@ -1,0 +1,1 @@
+import AppLayout from '../../layouts/AppLayout';import CrudPage from '../../components/CrudPage';export default function Page(){return <AppLayout role="parent"><CrudPage title="Notices" resource="notices" columns={[{key:'title',label:'Title'},{key:'audience',label:'Audience'}]} fields={[]} canEdit={false}/></AppLayout>}

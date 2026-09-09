@@ -1,0 +1,1 @@
+import AppLayout from '../../layouts/AppLayout';export default function Settings(){return <AppLayout role="principal"><h2>Settings</h2><div className="card"><p>School configuration, academic session, receipt settings and portal preferences can be managed here.</p></div></AppLayout>}

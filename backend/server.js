@@ -1,0 +1,1 @@
+import 'dotenv/config';import app from './app.js';import {connectDB} from './src/config/db.js';const port=process.env.PORT||4000;connectDB().then(()=>app.listen(port,()=>console.log(`API running on http://localhost:${port}`))).catch(e=>{console.error(e);process.exit(1)});

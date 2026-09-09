@@ -1,0 +1,2 @@
+import CrudPage from '../../components/CrudPage';
+export default function Page(){return <CrudPage title="Homework" resource="homework" columns={[{key:'className',label:'Class'},{key:'subject',label:'Subject'},{key:'title',label:'Title'},{key:'dueDate',label:'Due'}]} fields={[{name:'className',label:'Class'},{name:'subject',label:'Subject'},{name:'title',label:'Title',required:true},{name:'dueDate',label:'Due Date',type:'date'}]}/>}

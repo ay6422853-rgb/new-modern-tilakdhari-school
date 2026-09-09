@@ -1,0 +1,1 @@
+import AppLayout from '../../layouts/AppLayout';export default function Profile(){const u=JSON.parse(localStorage.getItem('user')||'{}');return <AppLayout role="operator"><h2>Profile</h2><div className="card"><p><b>Name:</b> {u.name}</p><p><b>Email:</b> {u.email}</p><p><b>Role:</b> {u.role}</p></div></AppLayout>}

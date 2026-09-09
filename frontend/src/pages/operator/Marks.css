@@ -1,0 +1,883 @@
+
+/* =========================================================
+   MARKS PAGE
+========================================================= */
+
+.marks-page {
+  min-height: 100vh;
+  padding: 28px;
+  background: #f6f8fc;
+  color: #182033;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.marks-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.marks-eyebrow {
+  display: inline-block;
+  margin-bottom: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #6b7280;
+}
+
+.marks-header h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.marks-header p {
+  margin: 8px 0 0;
+  color: #697386;
+  font-size: 14px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.download-btn,
+.save-btn,
+.secondary-download-btn,
+.generate-btn,
+.cancel-btn {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.download-btn:hover,
+.save-btn:hover,
+.secondary-download-btn:hover,
+.generate-btn:hover {
+  transform: translateY(-1px);
+}
+
+.download-btn:disabled,
+.save-btn:disabled,
+.secondary-download-btn:disabled,
+.generate-btn:disabled,
+.cancel-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: #111827;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 7px 18px rgba(17, 24, 39, 0.13);
+}
+
+.download-icon {
+  font-size: 19px;
+  line-height: 1;
+}
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.marks-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.marks-alert span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.marks-alert.error {
+  background: #fff1f2;
+  color: #be123c;
+  border: 1px solid #fecdd3;
+}
+
+.marks-alert.error span {
+  background: #be123c;
+  color: #fff;
+}
+
+.marks-alert.success {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.marks-alert.success span {
+  background: #047857;
+  color: #fff;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.marks-card {
+  background: #fff;
+  border: 1px solid #e8ebf1;
+  border-radius: 15px;
+  box-shadow: 0 6px 24px rgba(16, 24, 40, 0.045);
+}
+
+.filters-card {
+  padding: 22px;
+  margin-bottom: 18px;
+}
+
+.card-heading,
+.table-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+.card-heading {
+  margin-bottom: 20px;
+}
+
+.card-heading h2,
+.table-heading h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.card-heading p,
+.table-heading p {
+  margin: 5px 0 0;
+  color: #7b8495;
+  font-size: 12px;
+}
+
+.records-count {
+  padding: 7px 11px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.filter-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field label,
+.school-field label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.field select,
+.field input,
+.school-field input,
+.school-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dfe4ec;
+  outline: none;
+  border-radius: 9px;
+  background: #fff;
+  color: #1f2937;
+  font-family: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.field select,
+.field input,
+.school-field input {
+  height: 42px;
+  padding: 0 12px;
+}
+
+.school-field textarea {
+  padding: 11px 12px;
+  resize: vertical;
+  min-height: 75px;
+}
+
+.field select:focus,
+.field input:focus,
+.school-field input:focus,
+.school-field textarea:focus {
+  border-color: #64748b;
+  box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.1);
+}
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.table-card {
+  overflow: hidden;
+}
+
+.table-heading {
+  padding: 21px 22px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.selected-info {
+  padding: 7px 11px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.marks-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.marks-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.marks-table th {
+  padding: 13px 12px;
+  background: #f8fafc;
+  color: #667085;
+  border-bottom: 1px solid #e8ebf0;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.marks-table td {
+  padding: 12px;
+  border-bottom: 1px solid #f0f2f5;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+.marks-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.marks-table tbody tr:hover {
+  background: #fafbfc;
+}
+
+.serial {
+  color: #98a2b3;
+  width: 45px;
+}
+
+.student-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: #eef2f7;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.student-cell strong {
+  color: #1f2937;
+  font-size: 13px;
+}
+
+.roll-number {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.marks-input {
+  width: 78px;
+  height: 37px;
+  box-sizing: border-box;
+  padding: 0 9px;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: center;
+  transition: border-color 0.2s ease;
+}
+
+.marks-input:focus {
+  border-color: #64748b;
+}
+
+.remarks-input {
+  width: 150px;
+  height: 37px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.remarks-input:focus {
+  border-color: #64748b;
+}
+
+/* =========================================================
+   GRADE BADGES
+========================================================= */
+
+.grade-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 27px;
+  padding: 0 8px;
+  border-radius: 7px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.grade-aplus {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.grade-a {
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.grade-bplus,
+.grade-b {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.grade-c {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.grade-d {
+  background: #fff7ed;
+  color: #b45309;
+}
+
+.grade-f {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.status-badge.saved {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.status-badge.new {
+  background: #f8fafc;
+  color: #64748b;
+}
+
+/* =========================================================
+   TABLE FOOTER
+========================================================= */
+
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 20px;
+  background: #fafbfc;
+  border-top: 1px solid #edf0f4;
+}
+
+.footer-summary {
+  display: flex;
+  gap: 20px;
+  color: #667085;
+  font-size: 12px;
+}
+
+.footer-summary strong {
+  color: #1f2937;
+}
+
+.save-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 17px;
+  border-radius: 9px;
+  background: #111827;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 5px 14px rgba(17, 24, 39, 0.12);
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 13px;
+  border-radius: 13px;
+  background: #f1f5f9;
+  font-size: 21px;
+}
+
+.empty-state h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.empty-state p {
+  margin: 6px 0 0;
+  color: #8992a3;
+  font-size: 12px;
+}
+
+/* =========================================================
+   PDF INFO CARD
+========================================================= */
+
+.pdf-info-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 18px;
+  padding: 18px 20px;
+}
+
+.pdf-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  flex: 0 0 auto;
+  border-radius: 11px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.pdf-info-card h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.pdf-info-card p {
+  max-width: 760px;
+  margin: 5px 0 0;
+  color: #7b8495;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.secondary-download-btn {
+  margin-left: auto;
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border: 1px solid #dfe4ec;
+  border-radius: 9px;
+  background: #fff;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.58);
+  backdrop-filter: blur(4px);
+}
+
+.school-modal {
+  width: 100%;
+  max-width: 620px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 25px 80px rgba(15, 23, 42, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 23px 24px 18px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.modal-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  color: #94a3b8;
+}
+
+.modal-header h2 {
+  margin: 5px 0 0;
+  font-size: 20px;
+}
+
+.modal-header p {
+  margin: 5px 0 0;
+  color: #7b8495;
+  font-size: 12px;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.school-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  padding: 22px 24px;
+}
+
+.school-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.school-field.full {
+  grid-column: 1 / -1;
+}
+
+.school-field label span {
+  color: #dc2626;
+}
+
+.modal-preview {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 24px 20px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.preview-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 31px;
+  height: 31px;
+  border-radius: 8px;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.modal-preview strong {
+  display: block;
+  font-size: 12px;
+}
+
+.modal-preview span {
+  display: block;
+  margin-top: 2px;
+  color: #7b8495;
+  font-size: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  padding: 16px 24px 20px;
+  border-top: 1px solid #edf0f4;
+}
+
+.cancel-btn {
+  padding: 10px 15px;
+  border: 1px solid #dfe4ec;
+  border-radius: 9px;
+  background: #fff;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.generate-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 9px;
+  background: #111827;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   SPINNERS
+========================================================= */
+
+.marks-loading {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.marks-loading p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.marks-spinner,
+.small-spinner {
+  border: 3px solid #e5e7eb;
+  border-top-color: #475569;
+  border-radius: 50%;
+  animation: marks-spin 0.75s linear infinite;
+}
+
+.marks-spinner {
+  width: 32px;
+  height: 32px;
+}
+
+.small-spinner {
+  width: 13px;
+  height: 13px;
+  border-width: 2px;
+  border-top-color: #fff;
+}
+
+@keyframes marks-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+  .filter-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .marks-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .download-btn {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .marks-page {
+    padding: 16px;
+  }
+
+  .marks-header h1 {
+    font-size: 24px;
+  }
+
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .school-form {
+    grid-template-columns: 1fr;
+  }
+
+  .school-field.full {
+    grid-column: auto;
+  }
+
+  .table-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .save-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-summary {
+    flex-wrap: wrap;
+  }
+
+  .pdf-info-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .secondary-download-btn {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .school-modal {
+    max-height: calc(100vh - 20px);
+  }
+
+  .modal-header,
+  .school-form,
+  .modal-actions {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  .modal-preview {
+    margin-left: 17px;
+    margin-right: 17px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-btn,
+  .generate-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

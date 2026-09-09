@@ -1,0 +1,130 @@
+.acc-page {
+  padding: 28px;
+  background: #f6f8fc;
+  min-height: 100%;
+}
+
+.acc-page-head {
+  margin-bottom: 24px;
+}
+
+.acc-page-head span {
+  font-size: 11px;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 1.5px;
+}
+
+.acc-page-head h1 {
+  margin: 5px 0;
+  font-size: 29px;
+  color: #172033;
+}
+
+.acc-page-head p {
+  margin: 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+.acc-form-card {
+  background: #fff;
+  border: 1px solid #e6eaf0;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(15,23,42,.04);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #172033;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #edf0f5;
+  margin-bottom: 20px;
+}
+
+.payment-title {
+  margin-top: 28px;
+}
+
+.acc-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+}
+
+.acc-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.acc-grid input,
+.acc-grid select,
+.acc-grid textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dce2ea;
+  border-radius: 9px;
+  padding: 11px 12px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+}
+
+.acc-grid input:focus,
+.acc-grid select:focus,
+.acc-grid textarea:focus {
+  border-color: #6366f1;
+}
+
+.acc-grid textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.primary-btn {
+  margin-top: 25px;
+  border: 0;
+  background: #172033;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-btn:disabled {
+  opacity: .6;
+}
+
+.acc-alert {
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.acc-alert.error {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.acc-alert.success {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+@media(max-width:700px) {
+  .acc-page { padding: 18px; }
+  .acc-grid { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
+}

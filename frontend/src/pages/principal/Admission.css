@@ -1,0 +1,309 @@
+.principal-admission {
+  min-height: 100%;
+  padding: 28px;
+  background: #f6f8fc;
+  box-sizing: border-box;
+}
+
+.admission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 20px;
+}
+
+.admission-header > div > span {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  color: #64748b;
+}
+
+.admission-header h1 {
+  margin: 6px 0;
+  color: #172033;
+  font-size: 30px;
+}
+
+.admission-header p {
+  margin: 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+.admission-refresh {
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 16px;
+  background: #172554;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admission-error,
+.admission-success {
+  margin-bottom: 17px;
+  padding: 13px 16px;
+  border-radius: 9px;
+  font-size: 13px;
+}
+
+.admission-error {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #be123c;
+}
+
+.admission-success {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+.admission-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 20px;
+}
+
+.admission-card {
+  background: white;
+  border: 1px solid #e7ebf2;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
+}
+
+.admission-card-header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.admission-number {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 11px;
+  background: #e8eefc;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.admission-card-header h2 {
+  margin: 0;
+  font-size: 19px;
+  color: #172033;
+}
+
+.admission-card-header p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #718096;
+}
+
+.admission-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.admission-field label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.admission-field input,
+.admission-field select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px;
+  border: 1px solid #dce2eb;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+  color: #172033;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.admission-field input:focus,
+.admission-field select:focus {
+  border-color: #64748b;
+}
+
+.admission-help {
+  margin-top: 5px;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.selected-student {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 11px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.selected-avatar {
+  width: 43px;
+  height: 43px;
+  min-width: 43px;
+  border-radius: 50%;
+  background: #172554;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+}
+
+.selected-student strong {
+  display: block;
+  font-size: 14px;
+  color: #172033;
+}
+
+.selected-student span {
+  display: block;
+  margin-top: 4px;
+  color: #718096;
+  font-size: 11px;
+}
+
+.admission-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.admission-field.full {
+  grid-column: 1 / -1;
+}
+
+.admission-submit-area {
+  margin-top: 23px;
+  padding-top: 20px;
+  border-top: 1px solid #edf0f4;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admission-submit-area button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 20px;
+  background: #172554;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admission-submit-area button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admission-info {
+  margin-top: 20px;
+  padding: 17px;
+  background: #eef5ff;
+  border: 1px solid #dbeafe;
+  border-radius: 13px;
+  display: flex;
+  gap: 12px;
+}
+
+.info-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.admission-info strong {
+  color: #1e3a8a;
+  font-size: 13px;
+}
+
+.admission-info p {
+  margin: 5px 0 0;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.admission-loading {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #64748b;
+}
+
+.admission-spinner {
+  width: 33px;
+  height: 33px;
+  border: 3px solid #dbe3ef;
+  border-top-color: #172554;
+  border-radius: 50%;
+  animation: admission-spin 0.8s linear infinite;
+}
+
+@keyframes admission-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .admission-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .principal-admission {
+    padding: 18px;
+  }
+
+  .admission-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admission-refresh {
+    width: 100%;
+  }
+
+  .admission-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admission-field.full {
+    grid-column: auto;
+  }
+
+  .admission-submit-area button {
+    width: 100%;
+  }
+}

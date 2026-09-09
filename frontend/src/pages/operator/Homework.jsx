@@ -1,0 +1,2 @@
+import AppLayout from '../../layouts/AppLayout';import CrudPage from '../../components/CrudPage';
+export default function Page(){return <AppLayout role="operator"><CrudPage title="Homework" resource="homework" columns={[{key:'className',label:'Class'},{key:'subject',label:'Subject'},{key:'title',label:'Title'}]} fields={[{name:'className',label:'Class'},{name:'subject',label:'Subject'},{name:'title',label:'Title',required:true}]}/></AppLayout>}

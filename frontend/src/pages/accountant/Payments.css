@@ -1,0 +1,148 @@
+.payments-page {
+  padding: 28px;
+  background: #f6f8fc;
+  min-height: 100%;
+}
+
+.payments-head span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #64748b;
+}
+
+.payments-head h1 {
+  margin: 5px 0;
+  font-size: 29px;
+  color: #172033;
+}
+
+.payments-head p {
+  margin: 0 0 24px;
+  color: #718096;
+}
+
+.payment-form,
+.payments-table-card {
+  background: #fff;
+  border: 1px solid #e5e9f0;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.payment-form h2,
+.payments-table-card h2 {
+  margin: 0 0 20px;
+  font-size: 17px;
+  color: #172033;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 17px;
+}
+
+.payment-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.payment-grid input,
+.payment-grid select {
+  padding: 11px;
+  border: 1px solid #dce2ea;
+  border-radius: 9px;
+  outline: none;
+}
+
+.payment-full {
+  grid-column: 1 / -1;
+}
+
+.payment-form > button {
+  margin-top: 22px;
+  background: #172033;
+  color: white;
+  border: 0;
+  padding: 12px 22px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.payment-error {
+  background: #fff1f2;
+  color: #be123c;
+  padding: 13px;
+  border-radius: 9px;
+  margin-bottom: 18px;
+}
+
+.table-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-title button {
+  border: 1px solid #dce2ea;
+  background: white;
+  padding: 8px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 750px;
+}
+
+th,
+td {
+  padding: 13px 12px;
+  text-align: left;
+  border-bottom: 1px solid #edf0f4;
+  font-size: 13px;
+}
+
+th {
+  color: #64748b;
+  font-size: 12px;
+  background: #f8fafc;
+}
+
+td {
+  color: #334155;
+}
+
+.payment-badge {
+  background: #eef2ff;
+  color: #4f46e5;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.empty-row {
+  text-align: center;
+  padding: 35px;
+  color: #94a3b8;
+}
+
+@media(max-width:700px) {
+  .payments-page { padding: 18px; }
+  .payment-grid { grid-template-columns: 1fr; }
+  .payment-full { grid-column: auto; }
+}
