@@ -29,7 +29,6 @@ const menuConfig = {
     { label: "Cashbook", path: "/principal/cashbook", icon: "💼" },
     { label: "Reports", path: "/principal/reports", icon: "📈" },
     { label: "Profile", path: "/principal/profile", icon: "👤" },
-    { label: "Settings", path: "/principal/settings", icon: "⚙️" },
   ],
 
   ACCOUNTANT: [
