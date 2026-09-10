@@ -169,12 +169,24 @@ export async function attendance(req, res) {
 */
 
 export async function fees(req, res) {
-  res.json(
-    await Payment.find({
+  try {
+    const payments = await Payment.find({
       student: req.user.profileRef
     })
-      .sort({ date: -1 })
-  );
+      .populate(
+        "student",
+        "studentId registrationNo admissionNo name fatherName motherName className section rollNo session phone email address"
+      )
+      .sort({ date: -1 });
+
+    res.json(payments);
+  } catch (error) {
+    console.error("Student fees error:", error);
+
+    res.status(500).json({
+      message: error?.message || "Fees load nahi ho paayi."
+    });
+  }
 }
 
 /*
