@@ -22,7 +22,7 @@ export default function Home() {
           <a href="#facilities">Facilities</a>
 
           <Link className="nav-login" to="/login">
-            School Portal
+            Login
           </Link>
         </nav>
       </header>
