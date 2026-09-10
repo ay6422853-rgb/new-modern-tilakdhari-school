@@ -212,7 +212,7 @@ export default function AppLayout({
           </div>
 
           <div className="brand-text">
-            <h2>Vidyapeeth</h2>
+            <h2>New Modern TD IC</h2>
             <span>School Management</span>
           </div>
 

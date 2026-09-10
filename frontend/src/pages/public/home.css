@@ -1,660 +1,621 @@
-/* =========================================================
-   HOME PAGE
-========================================================= */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap");
+
+
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  background: #f8fafc;
+  color: #172033;
+}
 
 .home-page {
-  min-height: 100vh;
-  background: #fff;
-  color: #172033;
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
+  width: 100%;
   overflow-x: hidden;
 }
 
 
-/* =========================================================
+/* =========================
    NAVBAR
-========================================================= */
+========================= */
 
 .public-nav {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  z-index: 20;
 
-  z-index: 1000;
-
-  height: 76px;
-  padding: 0 6%;
+  width: 100%;
+  height: 88px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  background: rgba(255, 255, 255, 0.94);
+  padding: 0 7%;
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: white;
 
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45),
+    transparent
+  );
 }
-
-
-/* =========================================================
-   SCHOOL LOGO
-========================================================= */
 
 .school-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
 }
 
 .logo-icon {
-  width: 44px;
-  height: 44px;
+  width: 45px;
+  height: 45px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #172033;
-  color: #fff;
-
   border-radius: 12px;
 
-  font-size: 21px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 
-  box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.15);
+  font-size: 23px;
+
+  backdrop-filter: blur(10px);
 }
 
-.school-logo div {
+.school-brand {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.school-logo strong {
-  color: #172033;
-
-  font-size: 15px;
-  font-weight: 800;
+.school-brand strong {
+  font-size: 18px;
+  letter-spacing: -0.3px;
 }
 
-.school-logo small {
-  color: #7b8493;
-
+.school-brand small {
   font-size: 11px;
-  letter-spacing: 0.5px;
+  opacity: 0.75;
+  letter-spacing: 1.5px;
 }
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
 .public-nav nav {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 35px;
 }
 
 .public-nav nav a {
-  color: #4f596a;
-
+  color: white;
   text-decoration: none;
 
   font-size: 14px;
-  font-weight: 650;
+  font-weight: 500;
 
   transition: 0.25s ease;
 }
 
 .public-nav nav a:hover {
-  color: #172033;
+  opacity: 0.7;
 }
 
-.nav-login {
-  padding: 11px 19px;
+.public-nav .nav-login {
+  padding: 11px 20px;
 
-  color: #fff !important;
-  background: #172033;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
 
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
 
-  box-shadow:
-    0 8px 20px rgba(23, 32, 51, 0.2);
-
-  transition: 0.25s ease !important;
+  backdrop-filter: blur(10px);
 }
 
-.nav-login:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 12px 28px rgba(23, 32, 51, 0.28);
+.public-nav .nav-login:hover {
+  background: white;
+  color: #162033;
+  opacity: 1;
 }
 
 
-/* =========================================================
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero-section {
   position: relative;
 
-  min-height: 100vh;
-
-  padding: 150px 7% 90px;
+  min-height: 760px;
 
   display: flex;
   align-items: center;
 
-  overflow: hidden;
+  padding: 120px 7% 100px;
 
-  /*
-    IMPORTANT:
-    School building image
-  */
-
-  background-image:
-    url("/school.jpg");
-
+  background-image: url("/school-building.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  color: white;
 }
-
-
-/* =========================================================
-   HERO OVERLAY
-========================================================= */
 
 .hero-overlay {
   position: absolute;
   inset: 0;
 
-  /*
-    Left side lighter for text,
-    right side keeps school image visible
-  */
-
   background:
     linear-gradient(
       90deg,
-      rgba(10, 18, 32, 0.88) 0%,
-      rgba(10, 18, 32, 0.72) 42%,
-      rgba(10, 18, 32, 0.30) 75%,
-      rgba(10, 18, 32, 0.18) 100%
+      rgba(7, 18, 38, 0.92) 0%,
+      rgba(7, 18, 38, 0.72) 42%,
+      rgba(7, 18, 38, 0.28) 100%
     );
-
-  z-index: 1;
 }
-
-
-/* =========================================================
-   HERO CONTENT
-========================================================= */
 
 .hero-content {
   position: relative;
+  z-index: 2;
 
-  z-index: 5;
-
-  width: min(780px, 100%);
-
-  color: #fff;
+  max-width: 760px;
 }
-
-
-/* =========================================================
-   MOVING SCHOOL NAME
-========================================================= */
-
-.hero-content > h1:first-child {
-  width: max-content;
-  max-width: none;
-
-  margin: 0 0 28px;
-
-  color: #fff;
-
-  font-size: clamp(30px, 4vw, 54px);
-
-  line-height: 1.08;
-
-  font-weight: 850;
-
-  letter-spacing: -1.8px;
-
-  white-space: nowrap;
-
-  /*
-    Right → Left
-  */
-
-  animation:
-    schoolNameMove 8s linear infinite;
-}
-
-
-/*
-  SCHOOL NAME ANIMATION
-*/
-
-@keyframes schoolNameMove {
-
-  0% {
-    transform: translateX(80vw);
-    opacity: 0;
-  }
-
-  8% {
-    opacity: 1;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
-
-
-/* =========================================================
-   WELCOME
-========================================================= */
 
 .welcome-text {
   display: inline-block;
 
   margin-bottom: 18px;
 
-  color: rgba(255, 255, 255, 0.72);
-
   font-size: 12px;
+  font-weight: 700;
 
-  font-weight: 800;
+  letter-spacing: 3px;
 
-  letter-spacing: 2.5px;
+  opacity: 0.85;
 }
 
-
-/* =========================================================
-   MAIN HERO TITLE
-========================================================= */
-
-.hero-content > h1:nth-of-type(2) {
+.hero-content h1 {
   margin: 0;
 
-  color: #fff;
+  font-family: "Playfair Display", serif;
 
-  font-size: clamp(45px, 6vw, 80px);
+  font-size: clamp(45px, 6vw, 78px);
+  line-height: 1.04;
 
-  line-height: 0.98;
-
-  font-weight: 850;
-
-  letter-spacing: -4px;
+  letter-spacing: -2px;
 }
 
-.hero-content > h1:nth-of-type(2) span {
-  color: #d9e0e9;
+.hero-content h1 span {
+  color: #e8b85c;
 }
-
-
-/* =========================================================
-   DESCRIPTION
-========================================================= */
 
 .hero-content p {
   max-width: 620px;
 
-  margin: 28px 0 0;
-
-  color: rgba(255, 255, 255, 0.78);
+  margin: 28px 0 35px;
 
   font-size: 17px;
-
   line-height: 1.8;
+
+  color: rgba(255, 255, 255, 0.82);
 }
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
 
 .hero-buttons {
   display: flex;
   align-items: center;
-
   gap: 14px;
-
-  margin-top: 34px;
+  flex-wrap: wrap;
 }
 
 .primary-btn,
 .secondary-btn {
-  min-height: 52px;
-
-  padding: 0 22px;
-
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 15px;
 
-  gap: 12px;
+  padding: 15px 23px;
 
-  border-radius: 11px;
+  border-radius: 7px;
 
   text-decoration: none;
 
   font-size: 14px;
+  font-weight: 600;
 
-  font-weight: 750;
-
-  transition: 0.25s ease;
+  transition: 0.3s ease;
 }
-
-
-/* PRIMARY */
 
 .primary-btn {
-  color: #172033;
-
-  background: #fff;
-
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.18);
-}
-
-.primary-btn span {
-  font-size: 19px;
-
-  transition: transform 0.25s ease;
+  background: #e8b85c;
+  color: #162033;
 }
 
 .primary-btn:hover {
   transform: translateY(-3px);
-
-  box-shadow:
-    0 17px 35px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
-.primary-btn:hover span {
-  transform: translateX(5px);
+.primary-btn span {
+  font-size: 20px;
 }
-
-
-/* SECONDARY */
 
 .secondary-btn {
-  color: #fff;
+  color: white;
 
-  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 }
 
 .secondary-btn:hover {
-  transform: translateY(-3px);
-
-  background: rgba(255, 255, 255, 0.18);
+  background: white;
+  color: #162033;
 }
-
-
-/* =========================================================
-   SCROLL
-========================================================= */
 
 .hero-scroll {
   position: absolute;
 
-  z-index: 5;
+  z-index: 3;
 
-  right: 6%;
-  bottom: 32px;
+  right: 7%;
+  bottom: 42px;
 
   display: flex;
   align-items: center;
-
-  gap: 9px;
+  gap: 12px;
 
   color: rgba(255, 255, 255, 0.7);
 
   font-size: 11px;
-
-  font-weight: 650;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .hero-scroll span:last-child {
-  font-size: 18px;
-
-  animation:
-    scrollArrow 1.5s ease-in-out infinite;
-}
-
-@keyframes scrollArrow {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(6px);
-  }
+  font-size: 20px;
 }
 
 
-/* =========================================================
+/* =========================
    ABOUT
-========================================================= */
+========================= */
 
 .info-section {
-  max-width: 1200px;
-
-  margin: 0 auto;
-
-  padding: 120px 6%;
-
   display: grid;
-
   grid-template-columns: 1fr 1fr;
+  gap: 90px;
 
-  gap: 80px;
+  padding: 110px 9%;
+
+  background: white;
 }
 
 .section-label {
   display: inline-block;
 
-  margin-bottom: 16px;
-
-  color: #7c8697;
+  margin-bottom: 17px;
 
   font-size: 11px;
+  font-weight: 700;
 
-  font-weight: 800;
+  color: #9a6a1f;
 
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
 }
 
-.info-section h2,
-.facilities-section h2 {
-  margin: 0;
-
+.info-heading h2 {
   max-width: 600px;
 
+  margin: 0;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(35px, 4vw, 55px);
+  line-height: 1.15;
+
   color: #172033;
-
-  font-size: clamp(32px, 4vw, 52px);
-
-  line-height: 1.12;
-
-  letter-spacing: -2px;
 }
 
-.info-section p {
-  margin: 30px 0 0;
+.info-heading h2 span {
+  color: #9a6a1f;
+}
 
-  color: #697386;
+.info-content {
+  align-self: center;
+}
+
+.info-content p {
+  margin: 0 0 22px;
 
   font-size: 16px;
-
   line-height: 1.9;
+
+  color: #667085;
 }
 
 
-/* =========================================================
+/* =========================
    FEATURES
-========================================================= */
+========================= */
+
+.feature-wrapper {
+  padding: 105px 7% 120px;
+
+  background: #f4f6f8;
+}
+
+.feature-heading {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.feature-heading h2 {
+  margin: 0;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(35px, 4vw, 52px);
+  line-height: 1.15;
+}
+
+.feature-heading h2 span {
+  color: #9a6a1f;
+}
 
 .feature-section {
-  max-width: 1200px;
-
-  margin: 0 auto;
-
-  padding: 20px 6% 120px;
-
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .feature-card {
-  padding: 34px;
+  position: relative;
 
-  background: #fff;
+  padding: 35px 32px 40px;
 
-  border: 1px solid #e4e8ee;
+  min-height: 300px;
 
-  border-radius: 18px;
+  background: white;
 
-  transition: 0.25s ease;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-7px);
-
-  border-color: #d3d9e2;
+  transform: translateY(-8px);
 
   box-shadow:
-    0 20px 45px rgba(20, 30, 50, 0.09);
+    0 25px 60px rgba(16, 24, 40, 0.1);
+}
+
+.feature-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 35px;
 }
 
 .feature-icon {
-  width: 54px;
-  height: 54px;
+  width: 58px;
+  height: 58px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 23px;
-
-  background: #f1f4f8;
-
   border-radius: 14px;
 
-  font-size: 24px;
+  background: #f8f0df;
+
+  font-size: 26px;
+}
+
+.feature-number {
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #a0a6b0;
+
+  letter-spacing: 1px;
 }
 
 .feature-card h3 {
-  margin: 0 0 12px;
+  margin: 0 0 13px;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 27px;
 
   color: #172033;
-
-  font-size: 19px;
 }
 
 .feature-card p {
   margin: 0;
 
-  color: #747e8e;
-
   font-size: 14px;
+  line-height: 1.8;
 
-  line-height: 1.7;
+  color: #667085;
+}
+
+.feature-line {
+  position: absolute;
+
+  left: 32px;
+  bottom: 0;
+
+  width: 45px;
+  height: 3px;
+
+  background: #d2a247;
+
+  border-radius: 5px;
 }
 
 
-/* =========================================================
+/* =========================
    CAMPUS
-========================================================= */
+========================= */
 
 .facilities-section {
-  padding: 110px 7%;
+  position: relative;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
-  gap: 40px;
+  gap: 50px;
 
-  background: #172033;
+  padding: 100px 9%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #172033,
+      #26364e
+    );
+
+  color: white;
 }
 
-.facilities-section .section-label {
-  color: #aeb7c5;
+.campus-content {
+  max-width: 700px;
 }
 
-.facilities-section h2 {
-  color: #fff;
+.campus-content .section-label {
+  color: #e8b85c;
+}
+
+.campus-content h2 {
+  margin: 0 0 20px;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(40px, 5vw, 62px);
+  line-height: 1.1;
+}
+
+.campus-content h2 span {
+  color: #e8b85c;
+}
+
+.campus-content p {
+  max-width: 600px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: 15px;
+  line-height: 1.8;
 }
 
 .campus-btn {
   flex-shrink: 0;
 
-  padding: 15px 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
 
+  padding: 16px 25px;
+
+  border-radius: 7px;
+
+  background: white;
   color: #172033;
-
-  background: #fff;
-
-  border-radius: 10px;
 
   text-decoration: none;
 
   font-size: 14px;
+  font-weight: 700;
 
-  font-weight: 750;
-
-  transition: 0.25s ease;
+  transition: 0.3s ease;
 }
 
 .campus-btn:hover {
   transform: translateY(-3px);
+  background: #e8b85c;
+}
 
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.18);
+.campus-btn span {
+  font-size: 20px;
 }
 
 
-/* =========================================================
-   TABLET
-========================================================= */
+/* =========================
+   FOOTER
+========================= */
+
+.school-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding: 35px 7%;
+
+  background: #101827;
+
+  color: white;
+}
+
+.school-footer div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.school-footer strong {
+  font-size: 17px;
+}
+
+.school-footer span {
+  color: #98a2b3;
+  font-size: 11px;
+}
+
+.school-footer p {
+  margin: 0;
+
+  color: #667085;
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 900px) {
 
   .public-nav {
-    padding: 0 4%;
+    padding: 0 5%;
   }
 
   .public-nav nav {
@@ -666,202 +627,114 @@
   }
 
   .hero-section {
-    padding-left: 6%;
-    padding-right: 6%;
-
-    background-position: center;
+    min-height: 700px;
+    padding: 120px 7% 90px;
   }
-
-  .hero-content > h1:nth-of-type(2) {
-    font-size: 58px;
-
-    letter-spacing: -3px;
-  }
-
-  .info-section {
-    grid-template-columns: 1fr;
-
-    gap: 20px;
-  }
-
-  .feature-section {
-    grid-template-columns: 1fr;
-  }
-
-  .facilities-section {
-    flex-direction: column;
-
-    align-items: flex-start;
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-  .public-nav {
-    height: 68px;
-
-    padding: 0 18px;
-  }
-
-  .logo-icon {
-    width: 39px;
-    height: 39px;
-
-    font-size: 18px;
-  }
-
-  .school-logo strong {
-    font-size: 13px;
-  }
-
-  .school-logo small {
-    font-size: 9px;
-  }
-
-  .nav-login {
-    padding: 9px 13px;
-
-    font-size: 12px;
-  }
-
-
-  /* HERO */
-
-  .hero-section {
-    min-height: 100svh;
-
-    padding: 120px 22px 80px;
-
-    align-items: center;
-
-    background-position: center;
-  }
-
-  .hero-overlay {
-    background:
-      linear-gradient(
-        90deg,
-        rgba(10, 18, 32, 0.88),
-        rgba(10, 18, 32, 0.55)
-      );
-  }
-
-
-  /* SCHOOL NAME */
-
-  .hero-content > h1:first-child {
-    margin-bottom: 24px;
-
-    font-size: 27px;
-
-    letter-spacing: -1px;
-
-    white-space: nowrap;
-
-    animation-duration: 7s;
-  }
-
-
-  /* MAIN TITLE */
-
-  .hero-content > h1:nth-of-type(2) {
-    font-size: 46px;
-
-    line-height: 1;
-
-    letter-spacing: -2.5px;
-  }
-
-
-  /* DESCRIPTION */
-
-  .hero-content p {
-    margin-top: 23px;
-
-    font-size: 14px;
-
-    line-height: 1.7;
-  }
-
-
-  /* BUTTONS */
-
-  .hero-buttons {
-    flex-direction: column;
-
-    align-items: stretch;
-
-    margin-top: 28px;
-  }
-
-  .primary-btn,
-  .secondary-btn {
-    width: 100%;
-  }
-
 
   .hero-scroll {
     display: none;
   }
 
-
-  /* ABOUT */
-
   .info-section {
-    padding: 75px 22px;
+    grid-template-columns: 1fr;
+    gap: 35px;
+
+    padding: 80px 7%;
   }
-
-  .info-section h2,
-  .facilities-section h2 {
-    font-size: 34px;
-
-    letter-spacing: -1.4px;
-  }
-
-
-  /* FEATURES */
 
   .feature-section {
-    padding: 10px 22px 75px;
-
-    gap: 14px;
+    grid-template-columns: 1fr;
+    max-width: 600px;
   }
-
-  .feature-card {
-    padding: 27px;
-  }
-
-
-  /* CAMPUS */
 
   .facilities-section {
-    padding: 75px 22px;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 80px 7%;
   }
 
-  .campus-btn {
-    width: 100%;
-
-    text-align: center;
+  .school-footer {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
 
-/* =========================================================
-   ACCESSIBILITY
-========================================================= */
+@media (max-width: 600px) {
 
-@media (prefers-reduced-motion: reduce) {
+  .public-nav {
+    height: 75px;
+  }
 
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
+  .school-brand strong {
+    font-size: 15px;
+  }
 
-    transition: none !important;
+  .school-brand small {
+    font-size: 9px;
+  }
+
+  .logo-icon {
+    width: 39px;
+    height: 39px;
+    font-size: 19px;
+  }
+
+  .nav-login {
+    padding: 9px 14px !important;
+    font-size: 12px !important;
+  }
+
+  .hero-section {
+    min-height: 680px;
+
+    background-position: 62% center;
+  }
+
+  .hero-content h1 {
+    font-size: 43px;
+    letter-spacing: -1px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .info-section {
+    padding: 70px 6%;
+  }
+
+  .feature-wrapper {
+    padding: 75px 6%;
+  }
+
+  .feature-card {
+    padding: 28px;
+  }
+
+  .facilities-section {
+    padding: 70px 6%;
+  }
+
+  .campus-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .school-footer {
+    padding: 30px 6%;
   }
 }

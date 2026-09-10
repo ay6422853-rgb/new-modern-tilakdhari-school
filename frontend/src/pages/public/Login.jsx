@@ -88,7 +88,7 @@ export default function Login() {
           </div>
 
           {/* TITLE */}
-          <h1>School Portal</h1>
+          <h1>New Modern TD IC</h1>
 
           <p className="login-subtitle">
             Sign in to continue

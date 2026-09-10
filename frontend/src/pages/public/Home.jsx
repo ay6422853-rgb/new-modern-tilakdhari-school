@@ -8,10 +8,10 @@ export default function Home() {
       {/* NAVBAR */}
       <header className="public-nav">
         <div className="school-logo">
-          <span className="logo-icon">🏫</span>
+          <div className="logo-icon">🏫</div>
 
-          <div>
-            <strong>EduSphere School</strong>
+          <div className="school-brand">
+            <strong>New Modern TD IC</strong>
             <small>Learn • Grow • Lead</small>
           </div>
         </div>
@@ -22,7 +22,7 @@ export default function Home() {
           <a href="#facilities">Facilities</a>
 
           <Link className="nav-login" to="/login">
-            Portal Login
+            School Portal
           </Link>
         </nav>
       </header>
@@ -35,21 +35,20 @@ export default function Home() {
 
         <div className="hero-content">
 
-            <h1>New Modern Tilakdhari<br/> Inter College</h1>
-
           <span className="welcome-text">
-            WELCOME TO OUR SCHOOL
+            WELCOME TO
           </span>
 
           <h1>
-            Learning Today.
+            New Modern Tilakdhari
             <br />
-            <span>Leading Tomorrow.</span>
+            <span>Inter College</span>
           </h1>
 
           <p>
-            A modern school committed to quality education,
-            character building and preparing students for a brighter future.
+            Inspiring young minds through quality education,
+            strong values and a learning environment where every
+            student gets the opportunity to grow and succeed.
           </p>
 
           <div className="hero-buttons">
@@ -60,7 +59,7 @@ export default function Home() {
             </Link>
 
             <a className="secondary-btn" href="#about">
-              Explore School
+              Discover Our School
             </a>
 
           </div>
@@ -78,79 +77,134 @@ export default function Home() {
       {/* ABOUT */}
       <section className="info-section" id="about">
 
-        <div>
+        <div className="info-heading">
           <span className="section-label">
             ABOUT OUR SCHOOL
           </span>
 
           <h2>
-            Building knowledge, confidence and character.
+            Education that builds knowledge,
+            <span> values and confidence.</span>
           </h2>
         </div>
 
-        <p>
-          EduSphere School provides a modern learning environment
-          where students can develop academically, socially and creatively.
-          Our digital school platform connects administrators, teachers,
-          students and parents in one place.
-        </p>
+        <div className="info-content">
+          <p>
+            New Modern Tilakdhari Inter College is committed to
+            providing students with a strong academic foundation
+            along with discipline, confidence and character.
+          </p>
+
+          <p>
+            Our aim is to create a positive learning environment
+            where students can discover their potential, develop
+            essential skills and prepare themselves for the future.
+          </p>
+        </div>
 
       </section>
 
 
       {/* FEATURES */}
-      <section className="feature-section" id="academics">
+      <section className="feature-wrapper" id="academics">
 
-        <div className="feature-card">
+        <div className="feature-heading">
+          <span className="section-label">
+            WHY CHOOSE US
+          </span>
 
-          <div className="feature-icon">
-            📚
-          </div>
-
-          <h3>
-            Quality Education
-          </h3>
-
-          <p>
-            Structured academics designed to help every student
-            learn and grow.
-          </p>
-
+          <h2>
+            A learning environment designed
+            <br />
+            <span>for every student's growth.</span>
+          </h2>
         </div>
 
 
-        <div className="feature-card">
+        <div className="feature-section">
 
-          <div className="feature-icon">
-            👨‍🏫
+          {/* FEATURE 1 */}
+          <div className="feature-card">
+
+            <div className="feature-top">
+              <div className="feature-icon">
+                📚
+              </div>
+
+              <span className="feature-number">
+                01
+              </span>
+            </div>
+
+            <h3>
+              Quality Education
+            </h3>
+
+            <p>
+              Strong academic learning with a focus on clear
+              concepts, regular practice and overall student
+              development.
+            </p>
+
+            <span className="feature-line"></span>
+
           </div>
 
-          <h3>
-            Expert Teachers
-          </h3>
 
-          <p>
-            Dedicated teachers focused on student development
-            and achievement.
-          </p>
+          {/* FEATURE 2 */}
+          <div className="feature-card">
 
-        </div>
+            <div className="feature-top">
+              <div className="feature-icon">
+                👨‍🏫
+              </div>
 
+              <span className="feature-number">
+                02
+              </span>
+            </div>
 
-        <div className="feature-card">
+            <h3>
+              Expert Teachers
+            </h3>
 
-          <div className="feature-icon">
-            💻
+            <p>
+              Experienced and dedicated teachers who guide
+              students with care, discipline and individual
+              attention.
+            </p>
+
+            <span className="feature-line"></span>
+
           </div>
 
-          <h3>
-            Digital Campus
-          </h3>
 
-          <p>
-            Smart digital management for students, parents,
-            teachers and school administration.
-          </p>
+          {/* FEATURE 3 */}
+          <div className="feature-card">
+
+            <div className="feature-top">
+              <div className="feature-icon">
+                💻
+              </div>
+
+              <span className="feature-number">
+                03
+              </span>
+            </div>
+
+            <h3>
+              Digital Campus
+            </h3>
+
+            <p>
+              Modern digital management connecting school
+              administration, students, parents and academic
+              activities in one place.
+            </p>
+
+            <span className="feature-line"></span>
+
+          </div>
 
         </div>
 
@@ -160,23 +214,48 @@ export default function Home() {
       {/* CAMPUS */}
       <section className="facilities-section" id="facilities">
 
-        <div>
+        <div className="campus-content">
 
           <span className="section-label">
             OUR CAMPUS
           </span>
 
           <h2>
-            A place where students love to learn.
+            A place to learn,
+            <br />
+            <span>grow and achieve.</span>
           </h2>
+
+          <p>
+            A welcoming campus that provides students with
+            a comfortable environment for education, activities
+            and personal development.
+          </p>
 
         </div>
 
         <Link className="campus-btn" to="/login">
-          Enter School Portal →
+          Enter School Portal
+          <span>→</span>
         </Link>
 
       </section>
+
+
+      {/* FOOTER */}
+      <footer className="school-footer">
+
+        <div>
+          <strong>New Modern TD IC</strong>
+          <span>New Modern Tilakdhari Inter College</span>
+        </div>
+
+        <p>
+          © {new Date().getFullYear()} New Modern Tilakdhari Inter College.
+          All Rights Reserved.
+        </p>
+
+      </footer>
 
     </div>
   );
