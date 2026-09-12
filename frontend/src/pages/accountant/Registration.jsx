@@ -19,19 +19,20 @@ const initialForm = {
   paymentMethod: "CASH",
 };
 
-export default function Registration() {
+function Registration() {
   const [form, setForm] = useState(initialForm);
 
   const [classes, setClasses] = useState([]);
-  const [loadingClasses, setLoadingClasses] = useState(true);
+  const [loadingClasses, setLoadingClasses] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(null);
 
-  // =========================
-  // LOAD CLASSES
-  // =========================
+  // =========================================
+  // LOAD CLASSES FROM DATABASE
+  // =========================================
+
   useEffect(() => {
     const loadClasses = async () => {
       try {
@@ -40,9 +41,24 @@ export default function Registration() {
 
         const data = await list("accountant/classes");
 
-        setClasses(Array.isArray(data) ? data : []);
+        console.log("CLASSES FROM DATABASE:", data);
+
+        // Backend response:
+        // {
+        //   success: true,
+        //   classes: [...]
+        // }
+
+        const classList = Array.isArray(data?.classes)
+          ? data.classes
+          : [];
+
+        setClasses(classList);
+
       } catch (err) {
         console.error("Classes load error:", err);
+
+        setClasses([]);
 
         setError(
           err?.response?.data?.message ||
@@ -56,96 +72,115 @@ export default function Registration() {
     loadClasses();
   }, []);
 
-  // =========================
+  // =========================================
   // INPUT CHANGE
-  // =========================
-  const change = (e) => {
+  // =========================================
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
     setForm((prev) => ({
       ...prev,
       [name]: value,
     }));
+
+    setError("");
+    setSuccess(null);
   };
 
-  // =========================
+  // =========================================
   // CLASS CHANGE
-  // =========================
-  const classChange = (e) => {
+  // =========================================
+
+  const handleClassChange = (e) => {
     const classId = e.target.value;
 
-    const selectedClass = classes.find(
+    const selected = classes.find(
       (item) => String(item._id) === String(classId)
     );
 
     setForm((prev) => ({
       ...prev,
-      classId: selectedClass?._id || "",
-      className: selectedClass?.name || "",
+      classId,
+      className: selected?.name || "",
       section: "",
     }));
+
+    setError("");
+    setSuccess(null);
   };
 
-  // =========================
+  // =========================================
+  // SELECTED CLASS
+  // =========================================
+
+  const selectedClass = classes.find(
+    (item) =>
+      String(item._id) === String(form.classId)
+  );
+
+  const sections = selectedClass?.sections || [];
+
+  // =========================================
   // SUBMIT
-  // REGISTRATION = FINAL ADMISSION
-  // =========================
-  const submit = async (e) => {
+  // =========================================
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true);
     setError("");
-    setResult(null);
+    setSuccess(null);
+
+    // Basic validation
+    if (!form.name.trim()) {
+      setError("Student name required hai.");
+      return;
+    }
+
+    if (!form.dob) {
+      setError("Date of birth required hai.");
+      return;
+    }
+
+    if (!form.email.trim()) {
+      setError("Email required hai.");
+      return;
+    }
+
+    if (!form.classId) {
+      setError("Class select karein.");
+      return;
+    }
+
+    if (!form.section) {
+      setError("Section select karein.");
+      return;
+    }
+
+    if (!form.session.trim()) {
+      setError("Session required hai.");
+      return;
+    }
+
+    if (
+      form.registrationFee === "" ||
+      Number(form.registrationFee) < 0
+    ) {
+      setError("Valid registration fee enter karein.");
+      return;
+    }
 
     try {
-      if (!form.name.trim()) {
-        throw new Error("Student name is required.");
-      }
-
-      if (!form.dob) {
-        throw new Error(
-          "Date of Birth is required because it will be used as the initial student login password."
-        );
-      }
-
-      if (!form.email.trim()) {
-        throw new Error(
-          "Student email is required because it will be used as the login email."
-        );
-      }
-
-      if (!form.classId) {
-        throw new Error("Please select a class.");
-      }
-
-      if (!form.section) {
-        throw new Error("Please select a section.");
-      }
-
-      if (!form.session.trim()) {
-        throw new Error("Please enter session.");
-      }
-
-      const fee = Number(form.registrationFee || 0);
-
-      if (!Number.isFinite(fee) || fee < 0) {
-        throw new Error("Please enter a valid registration fee.");
-      }
+      setLoading(true);
 
       const payload = {
         name: form.name.trim(),
-
         fatherName: form.fatherName.trim(),
         motherName: form.motherName.trim(),
-
         dob: form.dob,
-
         gender: form.gender,
-
         phone: form.phone.trim(),
-
-        email: form.email.trim().toLowerCase(),
-
+        email: form.email.trim(),
         address: form.address.trim(),
 
         classId: form.classId,
@@ -154,564 +189,635 @@ export default function Registration() {
 
         session: form.session.trim(),
 
-        registrationFee: fee,
+        registrationFee: Number(
+          form.registrationFee || 0
+        ),
+
         paymentMethod: form.paymentMethod,
       };
 
-      const data = await registerStudent(payload);
+      console.log(
+        "REGISTER STUDENT PAYLOAD:",
+        payload
+      );
 
-      setResult(data);
+      const response = await registerStudent(payload);
+
+      console.log(
+        "REGISTER STUDENT RESPONSE:",
+        response
+      );
+
+      setSuccess(response);
 
       setForm(initialForm);
+
     } catch (err) {
-      console.error("Registration error:", err);
+      console.error(
+        "Student registration error:",
+        err
+      );
 
       setError(
         err?.response?.data?.message ||
           err?.message ||
-          "Registration failed."
+          "Student registration failed."
       );
     } finally {
       setLoading(false);
     }
   };
 
-  // =========================
-  // SELECTED CLASS
-  // =========================
-  const selectedClass = classes.find(
-    (item) =>
-      String(item._id) === String(form.classId)
-  );
+  // =========================================
+  // SUCCESS DATA
+  // =========================================
 
-  const sections = selectedClass?.sections || [];
-
-  // =========================
-  // SUCCESS STUDENT
-  // =========================
-  const registeredStudent = result?.student;
-
-  const receipt = result?.receipt;
-
-  // =========================
-  // LOGIN CREDENTIALS
-  // =========================
-  const loginCredentials = result?.loginCredentials;
+  const result = success?.student || success?.data?.student || success;
 
   return (
-    <div className="acc-page">
+    <div className="registration-page">
 
-      {/* ================= HEADER ================= */}
-      <div className="acc-page-head">
+      {/* =====================================
+          HEADER
+      ===================================== */}
+
+      <div className="registration-header">
         <div>
-          <span>ACCOUNTANT</span>
-
-          <h1>Student Registration & Admission</h1>
+          <h1>Student Registration</h1>
 
           <p>
-            Register the student, collect the registration/admission
-            fee and activate the student in one step.
+            New student ko school management
+            system me register karein.
           </p>
         </div>
       </div>
 
-      {/* ================= ERROR ================= */}
+      {/* =====================================
+          ERROR
+      ===================================== */}
+
       {error && (
-        <div className="acc-alert error">
+        <div className="registration-alert error">
           {error}
         </div>
       )}
 
-      {/* ================= SUCCESS ================= */}
-      {result && registeredStudent && (
-        <div className="acc-alert success">
+      {/* =====================================
+          SUCCESS
+      ===================================== */}
 
-          <strong>
-            Student Registration & Admission completed successfully.
-          </strong>
+      {success && (
+        <div className="registration-success">
 
-          <div style={{ marginTop: "12px" }}>
-            Registration No:{" "}
-            <b>
-              {registeredStudent.registrationNo || "-"}
-            </b>
-          </div>
+          <div className="success-title">
+            <span>✓</span>
 
-          <div>
-            Admission No:{" "}
-            <b>
-              {registeredStudent.admissionNo || "-"}
-            </b>
-          </div>
-
-          <div>
-            Student:{" "}
-            <b>
-              {registeredStudent.name || "-"}
-            </b>
-          </div>
-
-          <div>
-            Class:{" "}
-            <b>
-              {registeredStudent.className || "-"}
-            </b>
-            {" — "}
-            Section:{" "}
-            <b>
-              {registeredStudent.section || "-"}
-            </b>
-          </div>
-
-          <div>
-            Session:{" "}
-            <b>
-              {registeredStudent.session || "-"}
-            </b>
-          </div>
-
-          <div>
-            Status:{" "}
-            <b>
-              {registeredStudent.status || "ACTIVE"}
-            </b>
-          </div>
-
-          <div>
-            Registration / Admission Fee:{" "}
-            <b>
-              ₹
-              {Number(
-                registeredStudent.registrationFee || 0
-              ).toLocaleString("en-IN")}
-            </b>
-          </div>
-
-          {receipt?.receiptNo && (
             <div>
-              Receipt No:{" "}
-              <b>
-                {receipt.receiptNo}
-              </b>
+              <h2>Student Registered Successfully</h2>
+
+              <p>
+                Student registration complete ho gaya.
+              </p>
             </div>
-          )}
+          </div>
 
-          {receipt?.amount !== undefined && (
-            <div>
-              Amount Collected:{" "}
-              <b>
+          <div className="success-grid">
+
+            <div className="success-item">
+              <span>Student Name</span>
+              <strong>
+                {result?.name ||
+                  success?.student?.name ||
+                  "-"}
+              </strong>
+            </div>
+
+            <div className="success-item">
+              <span>Registration No.</span>
+              <strong>
+                {result?.registrationNo ||
+                  success?.registrationNo ||
+                  "-"}
+              </strong>
+            </div>
+
+            <div className="success-item">
+              <span>Admission No.</span>
+              <strong>
+                {result?.admissionNo ||
+                  success?.admissionNo ||
+                  "-"}
+              </strong>
+            </div>
+
+            <div className="success-item">
+              <span>Class</span>
+              <strong>
+                {result?.className ||
+                  form.className ||
+                  "-"}
+              </strong>
+            </div>
+
+            <div className="success-item">
+              <span>Section</span>
+              <strong>
+                {result?.section ||
+                  form.section ||
+                  "-"}
+              </strong>
+            </div>
+
+            <div className="success-item">
+              <span>Session</span>
+              <strong>
+                {result?.session ||
+                  form.session ||
+                  "-"}
+              </strong>
+            </div>
+
+            <div className="success-item">
+              <span>Status</span>
+              <strong>
+                {result?.status || "REGISTERED"}
+              </strong>
+            </div>
+
+            <div className="success-item">
+              <span>Registration Fee</span>
+              <strong>
                 ₹
-                {Number(
-                  receipt.amount || 0
-                ).toLocaleString("en-IN")}
-              </b>
+                {result?.registrationFee ??
+                  success?.registrationFee ??
+                  0}
+              </strong>
             </div>
-          )}
 
-          {/* ================= STUDENT LOGIN ================= */}
-          {loginCredentials && (
-            <div
-              className="student-login-details"
-              style={{
-                marginTop: "18px",
-                padding: "16px",
-                borderRadius: "10px",
-                background: "#ffffff",
-                border: "1px solid #d9e2ec",
-              }}
-            >
-              <h3
-                style={{
-                  marginTop: 0,
-                  marginBottom: "12px",
-                }}
-              >
-                Student Login Details
-              </h3>
-
-              <div style={{ marginBottom: "8px" }}>
-                <strong>Login Email: </strong>
-                <span>
-                  {loginCredentials.email || "-"}
-                </span>
-              </div>
-
-              <div style={{ marginBottom: "8px" }}>
-                <strong>Initial Password: </strong>
-                <span>
-                  {loginCredentials.temporaryPassword || "-"}
-                </span>
-              </div>
-
-              <div
-                style={{
-                  marginTop: "12px",
-                  fontSize: "13px",
-                  color: "#555",
-                }}
-              >
-                <b>Important:</b> This is the student's initial
-                login password. The student should change the
-                password after the first login.
-              </div>
+            <div className="success-item">
+              <span>Receipt No.</span>
+              <strong>
+                {success?.receiptNo ||
+                  success?.payment?.receiptNo ||
+                  "-"}
+              </strong>
             </div>
-          )}
 
-          <div style={{ marginTop: "12px" }}>
-            <b>
-              Student is now ACTIVE and ready for fee collection.
-            </b>
           </div>
+
+          {/* LOGIN DETAILS */}
+
+          {(success?.login ||
+            success?.credentials ||
+            success?.email ||
+            success?.password) && (
+            <div className="login-details">
+
+              <h3>Student Login Details</h3>
+
+              <div className="login-grid">
+
+                <div>
+                  <span>Email</span>
+                  <strong>
+                    {success?.login?.email ||
+                      success?.credentials?.email ||
+                      success?.email ||
+                      "-"}
+                  </strong>
+                </div>
+
+                <div>
+                  <span>Password</span>
+                  <strong>
+                    {success?.login?.password ||
+                      success?.credentials?.password ||
+                      success?.password ||
+                      "-"}
+                  </strong>
+                </div>
+
+              </div>
+
+            </div>
+          )}
 
         </div>
       )}
 
-      {/* ================= FORM ================= */}
+      {/* =====================================
+          FORM
+      ===================================== */}
+
       <form
-        className="acc-form-card"
-        onSubmit={submit}
+        className="registration-form"
+        onSubmit={handleSubmit}
       >
 
-        {/* ================= STUDENT INFORMATION ================= */}
-        <div className="section-title">
-          Student Information
-        </div>
+        {/* ===================================
+            PERSONAL INFORMATION
+        =================================== */}
 
-        <div className="acc-grid">
+        <div className="form-section">
 
-          {/* STUDENT NAME */}
-          <label>
-            Student Name *
+          <div className="section-heading">
+            <h2>Personal Information</h2>
 
-            <input
-              name="name"
-              value={form.name}
-              onChange={change}
-              required
-              placeholder="Enter student name"
-            />
-          </label>
+            <p>
+              Student ki basic information enter karein.
+            </p>
+          </div>
 
-          {/* FATHER NAME */}
-          <label>
-            Father's Name
+          <div className="form-grid">
 
-            <input
-              name="fatherName"
-              value={form.fatherName}
-              onChange={change}
-              placeholder="Father's name"
-            />
-          </label>
+            <div className="form-group full">
+              <label>
+                Student Name
+                <span>*</span>
+              </label>
 
-          {/* MOTHER NAME */}
-          <label>
-            Mother's Name
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Enter student name"
+              />
+            </div>
 
-            <input
-              name="motherName"
-              value={form.motherName}
-              onChange={change}
-              placeholder="Mother's name"
-            />
-          </label>
+            <div className="form-group">
+              <label>Father Name</label>
 
-          {/* DOB */}
-          <label>
-            Date of Birth *
+              <input
+                type="text"
+                name="fatherName"
+                value={form.fatherName}
+                onChange={handleChange}
+                placeholder="Enter father name"
+              />
+            </div>
 
-            <input
-              type="date"
-              name="dob"
-              value={form.dob}
-              onChange={change}
-              required
-            />
+            <div className="form-group">
+              <label>Mother Name</label>
 
-            <small>
-              This date will be used as the student's initial
-              login password.
-            </small>
-          </label>
+              <input
+                type="text"
+                name="motherName"
+                value={form.motherName}
+                onChange={handleChange}
+                placeholder="Enter mother name"
+              />
+            </div>
 
-          {/* GENDER */}
-          <label>
-            Gender
+            <div className="form-group">
+              <label>
+                Date of Birth
+                <span>*</span>
+              </label>
 
-            <select
-              name="gender"
-              value={form.gender}
-              onChange={change}
-            >
-              <option value="">
-                Select gender
-              </option>
+              <input
+                type="date"
+                name="dob"
+                value={form.dob}
+                onChange={handleChange}
+              />
+            </div>
 
-              <option value="MALE">
-                Male
-              </option>
+            <div className="form-group">
+              <label>Gender</label>
 
-              <option value="FEMALE">
-                Female
-              </option>
-
-              <option value="OTHER">
-                Other
-              </option>
-            </select>
-          </label>
-
-          {/* PHONE */}
-          <label>
-            Phone
-
-            <input
-              name="phone"
-              value={form.phone}
-              onChange={change}
-              placeholder="Mobile number"
-            />
-          </label>
-
-          {/* EMAIL */}
-          <label>
-            Email / Login Email *
-
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={change}
-              required
-              placeholder="Student login email"
-            />
-
-            <small>
-              This email will be used for student login.
-            </small>
-          </label>
-
-          {/* CLASS */}
-          <label>
-            Class *
-
-            <select
-              name="classId"
-              value={form.classId}
-              onChange={classChange}
-              required
-              disabled={loadingClasses}
-            >
-              <option value="">
-                {loadingClasses
-                  ? "Loading classes..."
-                  : "Select Class"}
-              </option>
-
-              {classes.map((item) => (
-                <option
-                  key={item._id}
-                  value={item._id}
-                >
-                  {item.name}
+              <select
+                name="gender"
+                value={form.gender}
+                onChange={handleChange}
+              >
+                <option value="">
+                  Select Gender
                 </option>
-              ))}
-            </select>
-          </label>
 
-          {/* SECTION */}
-          <label>
-            Section *
+                <option value="MALE">
+                  Male
+                </option>
 
-            <select
-              name="section"
-              value={form.section}
-              onChange={change}
-              required
-              disabled={!form.classId}
-            >
-              <option value="">
-                {form.classId
-                  ? "Select Section"
-                  : "Select Class First"}
-              </option>
+                <option value="FEMALE">
+                  Female
+                </option>
 
-              {sections.map((section, index) => {
-                const sectionValue =
-                  typeof section === "string"
-                    ? section
-                    : section?.name ||
-                      section?.section ||
-                      "";
+                <option value="OTHER">
+                  Other
+                </option>
+              </select>
+            </div>
 
-                if (!sectionValue) {
-                  return null;
-                }
+            <div className="form-group">
+              <label>Phone</label>
 
-                return (
-                  <option
-                    key={`${sectionValue}-${index}`}
-                    value={sectionValue}
-                  >
-                    {sectionValue}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
+              <input
+                type="tel"
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+                placeholder="Enter phone number"
+              />
+            </div>
 
-          {/* SESSION */}
-          <label>
-            Session *
+            <div className="form-group">
+              <label>
+                Email
+                <span>*</span>
+              </label>
 
-            <input
-              name="session"
-              value={form.session}
-              onChange={change}
-              required
-              placeholder="2026-2027"
-            />
-          </label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="Enter email address"
+              />
+            </div>
 
-          {/* ADDRESS */}
-          <label className="full">
-            Address
+            <div className="form-group full">
+              <label>Address</label>
 
-            <textarea
-              name="address"
-              value={form.address}
-              onChange={change}
-              placeholder="Student address"
-            />
-          </label>
-
-        </div>
-
-        {/* ================= PAYMENT ================= */}
-        <div className="section-title payment-title">
-          Registration / Admission Fee
-        </div>
-
-        <div className="acc-grid fee-grid">
-
-          {/* FEE */}
-          <label>
-            Registration / Admission Fee
-
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              name="registrationFee"
-              value={form.registrationFee}
-              onChange={change}
-              placeholder="0"
-            />
-
-            <small>
-              This fee is collected during registration.
-              No separate admission step is required.
-            </small>
-          </label>
-
-          {/* PAYMENT METHOD */}
-          <label>
-            Payment Method
-
-            <select
-              name="paymentMethod"
-              value={form.paymentMethod}
-              onChange={change}
-            >
-              <option value="CASH">
-                Cash
-              </option>
-
-              <option value="UPI">
-                UPI
-              </option>
-
-              <option value="CARD">
-                Card
-              </option>
-
-              <option value="BANK">
-                Bank
-              </option>
-
-              <option value="CHEQUE">
-                Cheque
-              </option>
-            </select>
-          </label>
-
-        </div>
-
-        {/* ================= SELECTED CLASS ================= */}
-        {form.classId && (
-          <div className="selected-class-info">
-
-            <strong>Class:</strong>{" "}
-            {form.className}
-
-            {form.section && (
-              <>
-                {" | "}
-                <strong>Section:</strong>{" "}
-                {form.section}
-              </>
-            )}
-
-            {form.session && (
-              <>
-                {" | "}
-                <strong>Session:</strong>{" "}
-                {form.session}
-              </>
-            )}
+              <textarea
+                name="address"
+                value={form.address}
+                onChange={handleChange}
+                placeholder="Enter complete address"
+                rows="3"
+              />
+            </div>
 
           </div>
-        )}
 
-        {/* ================= FINAL INFO ================= */}
-        <div className="registration-note">
-          <strong>Note:</strong>{" "}
-          Completing this form will:
-
-          <ul>
-            <li>Create the student registration.</li>
-            <li>Generate Registration No. and Admission No.</li>
-            <li>Collect the registration/admission fee.</li>
-            <li>Generate the payment receipt.</li>
-            <li>Make the student <b>ACTIVE</b>.</li>
-            <li>Create a student login account automatically.</li>
-            <li>Use the entered email as the login email.</li>
-            <li>Use the Date of Birth as the initial password.</li>
-            <li>No separate Admission process is required.</li>
-          </ul>
         </div>
 
-        {/* ================= SUBMIT ================= */}
-        <button
-          type="submit"
-          className="primary-btn"
-          disabled={
-            loading ||
-            loadingClasses ||
-            !form.name.trim() ||
-            !form.dob ||
-            !form.email.trim() ||
-            !form.classId ||
-            !form.section ||
-            !form.session.trim()
-          }
-        >
-          {loading
-            ? "Registering & Creating Login..."
-            : "Register & Complete Admission"}
-        </button>
+        {/* ===================================
+            ACADEMIC INFORMATION
+        =================================== */}
+
+        <div className="form-section">
+
+          <div className="section-heading">
+            <h2>Academic Information</h2>
+
+            <p>
+              Student ki class aur session select karein.
+            </p>
+          </div>
+
+          <div className="form-grid">
+
+            {/* CLASS */}
+
+            <div className="form-group">
+
+              <label>
+                Class
+                <span>*</span>
+              </label>
+
+              <select
+                name="classId"
+                value={form.classId}
+                onChange={handleClassChange}
+                disabled={loadingClasses}
+              >
+
+                <option value="">
+                  {loadingClasses
+                    ? "Classes loading..."
+                    : classes.length === 0
+                    ? "No classes found"
+                    : "Select Class"}
+                </option>
+
+                {classes.map((item) => (
+                  <option
+                    key={item._id}
+                    value={item._id}
+                  >
+                    {item.name}
+                  </option>
+                ))}
+
+              </select>
+
+              {!loadingClasses &&
+                classes.length === 0 && (
+                  <small className="field-error">
+                    Database se koi active class nahi mili.
+                  </small>
+                )}
+
+            </div>
+
+            {/* SECTION */}
+
+            <div className="form-group">
+
+              <label>
+                Section
+                <span>*</span>
+              </label>
+
+              <select
+                name="section"
+                value={form.section}
+                onChange={handleChange}
+                disabled={
+                  !form.classId ||
+                  sections.length === 0
+                }
+              >
+
+                <option value="">
+                  {!form.classId
+                    ? "Pehle class select karein"
+                    : sections.length === 0
+                    ? "No section found"
+                    : "Select Section"}
+                </option>
+
+                {sections.map(
+                  (section, index) => {
+
+                    const sectionValue =
+                      typeof section === "string"
+                        ? section
+                        : section?.name ||
+                          section?.section ||
+                          "";
+
+                    if (!sectionValue) {
+                      return null;
+                    }
+
+                    return (
+                      <option
+                        key={`${sectionValue}-${index}`}
+                        value={sectionValue}
+                      >
+                        {sectionValue}
+                      </option>
+                    );
+                  }
+                )}
+
+              </select>
+
+              {form.classId &&
+                sections.length === 0 && (
+                  <small className="field-error">
+                    Is class ke liye database me
+                    section available nahi hai.
+                  </small>
+                )}
+
+            </div>
+
+            {/* SESSION */}
+
+            <div className="form-group">
+
+              <label>
+                Session
+                <span>*</span>
+              </label>
+
+              <input
+                type="text"
+                name="session"
+                value={form.session}
+                onChange={handleChange}
+                placeholder="2026-2027"
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* ===================================
+            REGISTRATION PAYMENT
+        =================================== */}
+
+        <div className="form-section">
+
+          <div className="section-heading">
+            <h2>Registration Payment</h2>
+
+            <p>
+              Registration fee ki information enter karein.
+            </p>
+          </div>
+
+          <div className="form-grid">
+
+            <div className="form-group">
+
+              <label>
+                Registration Fee
+                <span>*</span>
+              </label>
+
+              <input
+                type="number"
+                name="registrationFee"
+                value={form.registrationFee}
+                onChange={handleChange}
+                placeholder="Enter amount"
+                min="0"
+              />
+
+            </div>
+
+            <div className="form-group">
+
+              <label>Payment Method</label>
+
+              <select
+                name="paymentMethod"
+                value={form.paymentMethod}
+                onChange={handleChange}
+              >
+
+                <option value="CASH">
+                  Cash
+                </option>
+
+                <option value="UPI">
+                  UPI
+                </option>
+
+                <option value="CARD">
+                  Card
+                </option>
+
+                <option value="BANK">
+                  Bank Transfer
+                </option>
+
+                <option value="CHEQUE">
+                  Cheque
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* ===================================
+            SUBMIT
+        =================================== */}
+
+        <div className="form-actions">
+
+          <button
+            type="button"
+            className="secondary-btn"
+            onClick={() => {
+              setForm(initialForm);
+              setError("");
+              setSuccess(null);
+            }}
+            disabled={loading}
+          >
+            Reset
+          </button>
+
+          <button
+            type="submit"
+            className="primary-btn"
+            disabled={
+              loading ||
+              loadingClasses ||
+              !form.name ||
+              !form.dob ||
+              !form.email ||
+              !form.classId ||
+              !form.section ||
+              !form.session ||
+              form.registrationFee === ""
+            }
+          >
+
+            {loading
+              ? "Registering..."
+              : "Register Student"}
+
+          </button>
+
+        </div>
 
       </form>
+
     </div>
   );
 }
+
+export default Registration;
