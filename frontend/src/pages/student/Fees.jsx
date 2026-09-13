@@ -409,7 +409,7 @@ function Fees() {
           <div class="school-header">
 
             <h1>
-              Vidyapeeth Martinganj
+              New Modern TD IC
             </h1>
 
             <p>
